@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Logs
+*.log
+
+# iOS
+ios/Pods/
+ios/build/
+ios/*.xcworkspace
+ios/*.xcodeproj/project.xcworkspace
+ios/*.xcodeproj/xcuserdata
+*.ds_store
+
+# Android
+android/app/build/
+android/.gradle/
+
+# Env
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Misc
+.DS_Store
+dist/
+coverage/
+.vscode/
+.idea/
+
+# Build artifacts
+quickshop-mobile/build.log
+quickshop-backend/*.log
