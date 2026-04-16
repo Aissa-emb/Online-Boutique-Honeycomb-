@@ -53,7 +53,7 @@ jobs:
           node-version: '18'
 
       - name: Install JS dependencies
-        run: cd quickshop-mobile && npm ci
+        run: cd quickshop-mobile && npm install
 
       - name: Cache CocoaPods
         uses: actions/cache@v4

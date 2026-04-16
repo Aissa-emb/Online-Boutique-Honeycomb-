@@ -32,7 +32,7 @@ jobs:
       - name: Install JS dependencies
         run: |
           cd quickshop-mobile
-          npm ci
+          npm install
 
       - name: Cache CocoaPods
         uses: actions/cache@v4
