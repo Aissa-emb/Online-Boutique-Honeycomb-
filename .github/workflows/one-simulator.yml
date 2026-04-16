@@ -45,7 +45,8 @@ jobs:
         run: |
           cd quickshop-mobile/ios
           rm -f Podfile.lock
-          pod install --repo-update
+          pod cache clean --all
+          pod install --repo-update || (pod repo remove trunk; pod install --repo-update)
 
       - name: Build for Testing
         run: |
