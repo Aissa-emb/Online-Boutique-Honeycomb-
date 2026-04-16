@@ -43,9 +43,7 @@ jobs:
       - name: Install CocoaPods
         run: |
           cd quickshop-mobile/ios
-          rm -f Podfile.lock
-          pod cache clean --all
-          pod install --repo-update || (pod repo remove trunk; pod install --repo-update)
+          pod install
 
       - name: Build for Testing
         run: |
