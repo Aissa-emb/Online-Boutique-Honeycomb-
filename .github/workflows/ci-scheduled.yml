@@ -63,9 +63,12 @@ jobs:
           restore-keys: pods-
 
       - name: Install CocoaPods
+        env:
+          CP_HOME_DIR: ${{ runner.temp }}/cocoapods
         run: |
           cd quickshop-mobile/ios
-          pod install
+          export COCOAPODS_DISABLE_SPEC_CHECKSUMS=1
+          pod install --no-repo-update || pod install --repo-update
 
       - name: Build for Testing
         run: |
