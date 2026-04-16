@@ -113,7 +113,7 @@ const FeaturedCollectionScreen = ({ navigation }) => {
     );
 
     return (
-        <View style={styles.container}>
+        <View testID="featuredCollectionView" style={styles.container}>
             <StatusBar barStyle="light-content" backgroundColor="#1B1B1B" />
 
             <View style={styles.topBar}>

@@ -30,7 +30,7 @@ const SearchScreen = ({ navigation }) => {
         : [];
 
     return (
-        <SafeAreaView style={styles.container} edges={['top']}>
+        <SafeAreaView testID="searchView" style={styles.container} edges={['top']}>
             <StatusBar barStyle="light-content" backgroundColor="#1B1B1B" />
             <View style={styles.topBar}>
                 <Text style={styles.topBarTitle}>ONLINE<Text style={styles.topBarTitleLight}>BOUTIQUE</Text></Text>
@@ -39,6 +39,7 @@ const SearchScreen = ({ navigation }) => {
             <View style={styles.searchContainer}>
                 <Image source={require('../assets/icons/search.png')} style={styles.searchIcon} resizeMode="contain" />
                 <TextInput
+                    testID="searchInput"
                     style={styles.searchInput}
                     placeholder="Search products..."
                     placeholderTextColor="#8E8E93"
@@ -52,7 +53,7 @@ const SearchScreen = ({ navigation }) => {
                 <View style={styles.trendingSection}>
                     <Text style={styles.trendingTitle}>TRENDING SEARCHES</Text>
                     {TRENDING.map((term, i) => (
-                        <TouchableOpacity key={i} style={styles.trendingItem} onPress={() => setQuery(term)}>
+                        <TouchableOpacity key={i} testID={`trending-${term.replace(/\s+/g, '-').toLowerCase()}`} style={styles.trendingItem} onPress={() => setQuery(term)}>
                             <Text style={styles.trendingText}>{term}</Text>
                         </TouchableOpacity>
                     ))}
@@ -64,6 +65,7 @@ const SearchScreen = ({ navigation }) => {
                     contentContainerStyle={styles.resultsList}
                     renderItem={({ item }) => (
                         <TouchableOpacity
+                            testID={`searchResult-${item.id}`}
                             style={styles.resultCard}
                             onPress={() => {
                                 addBreadcrumb(`Search result tapped: ${item.name}`);

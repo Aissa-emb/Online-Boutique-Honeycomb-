@@ -31,7 +31,7 @@ const ProductDetailScreen = ({ route, navigation }) => {
     };
 
     return (
-        <View style={styles.container}>
+        <View testID="productDetailView" style={styles.container}>
             <StatusBar barStyle="light-content" backgroundColor="#1B1B1B" />
 
             <View style={styles.topBar}>
@@ -49,8 +49,8 @@ const ProductDetailScreen = ({ route, navigation }) => {
 
                 <View style={styles.infoSection}>
                     <View style={styles.dividerTop} />
-                    <Text style={styles.name}>{product.name}</Text>
-                    <Text style={styles.price}>USD {typeof product.price === 'number' ? product.price.toFixed(2) : product.price}</Text>
+                    <Text testID="productDetailName" style={styles.name}>{product.name}</Text>
+                    <Text testID="productDetailPrice" style={styles.price}>USD {typeof product.price === 'number' ? product.price.toFixed(2) : product.price}</Text>
 
                     <Text style={styles.descriptionLabel}>PRODUCT DESCRIPTION:</Text>
                     <Text style={styles.description}>
@@ -70,7 +70,7 @@ const ProductDetailScreen = ({ route, navigation }) => {
                                 </TouchableOpacity>
                             </View>
                         </View>
-                        <TouchableOpacity style={styles.addToCartButton} onPress={handleAddToCart} activeOpacity={0.8}>
+                        <TouchableOpacity testID="productDetailAddToCartButton" style={styles.addToCartButton} onPress={handleAddToCart} activeOpacity={0.8}>
                             <Text style={styles.addToCartText}>ADD TO CART</Text>
                         </TouchableOpacity>
                     </View>

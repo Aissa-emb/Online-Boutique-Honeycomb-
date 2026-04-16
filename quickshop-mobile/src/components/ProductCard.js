@@ -25,7 +25,7 @@ const ProductCard = ({ product, onPress, onAdd }) => {
     };
 
     return (
-        <Pressable style={styles.card} onPress={onPress}>
+        <Pressable testID={`product-card-${product.id}`} style={styles.card} onPress={onPress}>
             <View style={styles.imageContainer}>
                 <Image source={product.image} style={styles.image} resizeMode="cover" />
                 {product.badge && (
@@ -39,6 +39,7 @@ const ProductCard = ({ product, onPress, onAdd }) => {
                 <Text style={styles.price}>USD {product.price.toFixed(2)}</Text>
 
                 <Pressable
+                    testID={`product-add-to-cart-${product.id}`}
                     onPressIn={handlePressIn}
                     onPressOut={handlePressOut}
                     onPress={onAdd}

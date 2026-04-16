@@ -1,0 +1,85 @@
+# ============================================================================
+# build.yml — Build Test Artifacts (reusable for all test workflows)
+# ============================================================================
+# Trigger: Push to main, manual
+# Purpose: Build once, upload artifacts so test workflows skip re-building
+# ============================================================================
+
+name: Build Test Artifacts
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: macos-14
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: quickshop-mobile/package-lock.json
+
+      - name: Install JS dependencies
+        run: |
+          cd quickshop-mobile
+          npm ci
+
+      - name: Cache CocoaPods
+        uses: actions/cache@v4
+        with:
+          path: quickshop-mobile/ios/Pods
+          key: pods-${{ hashFiles('quickshop-mobile/ios/Podfile.lock') }}
+          restore-keys: pods-
+
+      - name: Install CocoaPods
+        run: |
+          cd quickshop-mobile/ios
+          pod install --repo-update
+
+      - name: Build for Testing
+        run: |
+          cd quickshop-mobile/ios
+          xcodebuild build-for-testing \
+            -workspace QuickShop.xcworkspace \
+            -scheme QuickShop \
+            -destination 'platform=iOS Simulator,name=iPhone 16' \
+            -derivedDataPath build/DerivedData \
+            CODE_SIGNING_ALLOWED=NO \
+            | tail -30
+
+      - name: Upload dSYMs to Embrace
+        if: success()
+        env:
+          EMBRACE_API_TOKEN: ${{ secrets.EMBRACE_API_TOKEN }}
+          APP_ID: ${{ vars.APP_ID }}
+        run: |
+          chmod +x scripts/upload-dsyms.sh
+          ./scripts/upload-dsyms.sh quickshop-mobile/ios/build/DerivedData/Build/Products
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: |
+            quickshop-mobile/ios/build/DerivedData/Build/Products
+          retention-days: 1
+
+      - name: Upload xctestrun
+        uses: actions/upload-artifact@v4
+        with:
+          name: xctestrun
+          path: |
+            quickshop-mobile/ios/build/DerivedData/Build/Products/*.xctestrun
+          retention-days: 1

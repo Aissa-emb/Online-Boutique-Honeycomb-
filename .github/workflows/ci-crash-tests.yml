@@ -1,0 +1,102 @@
+# ============================================================================
+# ci-crash-tests.yml — Crash Report Tests (every 8 hours)
+# ============================================================================
+# Deterministically crashes the app and relaunches to verify crash reports.
+# 3 crash/flush cycles per run × 3 runs/day = ~18 sessions/day
+# Estimated runner time: ~6 min/run × 3 = ~18 min/day
+# ============================================================================
+
+name: Crash Tests
+
+on:
+  schedule:
+    - cron: '30 */8 * * *'    # Every 8 hours at :30
+  workflow_dispatch:
+
+concurrency:
+  group: ci-crash-tests
+  cancel-in-progress: true
+
+jobs:
+  crash-tests:
+    runs-on: macos-14
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: quickshop-mobile/package-lock.json
+
+      - name: Install JS dependencies
+        run: cd quickshop-mobile && npm ci
+
+      - name: Cache CocoaPods
+        uses: actions/cache@v4
+        with:
+          path: quickshop-mobile/ios/Pods
+          key: pods-${{ hashFiles('quickshop-mobile/ios/Podfile.lock') }}
+          restore-keys: pods-
+
+      - name: Install CocoaPods
+        run: cd quickshop-mobile/ios && pod install
+
+      - name: Build for Testing
+        run: |
+          cd quickshop-mobile/ios
+          xcodebuild build-for-testing \
+            -workspace QuickShop.xcworkspace \
+            -scheme QuickShop \
+            -destination 'platform=iOS Simulator,name=iPhone 16' \
+            -derivedDataPath build/DerivedData \
+            CODE_SIGNING_ALLOWED=NO \
+            | tail -20
+
+      - name: Upload dSYMs to Embrace
+        env:
+          EMBRACE_API_TOKEN: ${{ secrets.EMBRACE_API_TOKEN }}
+          APP_ID: ${{ vars.APP_ID }}
+        run: |
+          chmod +x scripts/upload-dsyms.sh
+          ./scripts/upload-dsyms.sh quickshop-mobile/ios/build/DerivedData/Build/Products
+
+      - name: Run Crash/Flush Cycles
+        env:
+          RUN_SOURCE: crash-test
+        run: |
+          cd quickshop-mobile/ios
+          
+          for cycle in 1 2 3; do
+            echo ""
+            echo "========= Crash Cycle $cycle/3 ========="
+            
+            echo "--- Crash A: Force Crash ---"
+            xcodebuild test-without-building \
+              -workspace QuickShop.xcworkspace \
+              -scheme QuickShop \
+              -destination 'platform=iOS Simulator,name=iPhone 16' \
+              -derivedDataPath build/DerivedData \
+              -only-testing "OnlineBoutiqueUITests/OnlineBoutiqueUITests/testCrashA_Force" \
+              RUN_SOURCE="crash-test" \
+              2>&1 | tail -10 || echo "⚠️ Crash test ended (expected)"
+            
+            sleep 3
+            
+            echo "--- Crash B: Flush ---"
+            xcodebuild test-without-building \
+              -workspace QuickShop.xcworkspace \
+              -scheme QuickShop \
+              -destination 'platform=iOS Simulator,name=iPhone 16' \
+              -derivedDataPath build/DerivedData \
+              -only-testing "OnlineBoutiqueUITests/OnlineBoutiqueUITests/testCrashB_Flush" \
+              RUN_SOURCE="crash-test" \
+              2>&1 | tail -10 || echo "⚠️ Flush finished"
+            
+            sleep 2
+          done
+          
+          echo "All crash cycles complete."

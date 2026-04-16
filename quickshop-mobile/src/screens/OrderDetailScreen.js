@@ -18,7 +18,7 @@ const OrderDetailScreen = ({ route, navigation }) => {
     }, [orderId]);
 
     return (
-        <SafeAreaView style={styles.container} edges={['top']}>
+        <SafeAreaView testID="orderDetailView" style={styles.container} edges={['top']}>
             <StatusBar barStyle="light-content" backgroundColor="#1B1B1B" />
             <View style={styles.topBar}>
                 <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>

@@ -100,6 +100,7 @@ export default function App() {
                         name="Home"
                         component={HomeStack}
                         options={{
+                            tabBarTestID: 'homeTab',
                             tabBarIcon: ({ focused }) => <TabIcon label="Home" iconSource={require('./src/assets/icons/home.png')} focused={focused} />,
                         }}
                     />
@@ -107,6 +108,7 @@ export default function App() {
                         name="Search"
                         component={SearchStack}
                         options={{
+                            tabBarTestID: 'searchTab',
                             tabBarIcon: ({ focused }) => <TabIcon label="Search" iconSource={require('./src/assets/icons/search.png')} focused={focused} />,
                         }}
                     />
@@ -114,6 +116,7 @@ export default function App() {
                         name="Orders"
                         component={OrdersStack}
                         options={{
+                            tabBarTestID: 'ordersTab',
                             tabBarIcon: ({ focused }) => <TabIcon label="Orders" iconSource={require('./src/assets/icons/orders.png')} focused={focused} />,
                         }}
                     />
@@ -121,6 +124,7 @@ export default function App() {
                         name="Account"
                         component={AccountStack}
                         options={{
+                            tabBarTestID: 'accountTab',
                             tabBarIcon: ({ focused }) => <TabIcon label="Account" iconSource={require('./src/assets/icons/account.png')} focused={focused} />,
                         }}
                     />

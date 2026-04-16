@@ -54,7 +54,7 @@ const WishlistScreen = ({ navigation }) => {
     );
 
     return (
-        <View style={styles.container}>
+        <View testID="wishlistView" style={styles.container}>
             <StatusBar barStyle="light-content" backgroundColor="#1B1B1B" />
             <FlatList
                 data={items}

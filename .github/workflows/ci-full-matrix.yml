@@ -1,0 +1,100 @@
+# ============================================================================
+# ci-full-matrix.yml — Full Device Matrix Tests (manual only)
+# ============================================================================
+# Manual trigger only — no automated schedule to save free-tier minutes.
+# Useful before demos: runs 6 tests across 3 device types = 18 sessions.
+# ============================================================================
+
+name: Full Device Matrix
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-full-matrix
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: macos-14
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        device:
+          - name: "iPhone 16"
+            destination: "platform=iOS Simulator,name=iPhone 16"
+            tag: "16"
+          - name: "iPhone 16 Pro"
+            destination: "platform=iOS Simulator,name=iPhone 16 Pro"
+            tag: "16-pro"
+          - name: "iPhone SE (3rd generation)"
+            destination: "platform=iOS Simulator,name=iPhone SE (3rd generation)"
+            tag: "se-3rd-gen"
+        test_suite:
+          - name: "Browse"
+            target: "OnlineBoutiqueUITests/OnlineBoutiqueUITests/testBrowseProducts"
+            tag: "browse"
+          - name: "Add to Cart"
+            target: "OnlineBoutiqueUITests/OnlineBoutiqueUITests/testAddToCart"
+            tag: "cart"
+          - name: "Search"
+            target: "OnlineBoutiqueUITests/OnlineBoutiqueUITests/testSearchFlow"
+            tag: "search"
+          - name: "Checkout"
+            target: "OnlineBoutiqueUITests/OnlineBoutiqueUITests/testCheckoutFlow"
+            tag: "checkout"
+          - name: "Account"
+            target: "OnlineBoutiqueUITests/OnlineBoutiqueUITests/testAccountView"
+            tag: "account"
+          - name: "Multi-Session"
+            target: "OnlineBoutiqueUITests/OnlineBoutiqueUITests/testMultiSessionTimeline"
+            tag: "multi-session"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: quickshop-mobile/package-lock.json
+
+      - name: Install JS dependencies
+        run: cd quickshop-mobile && npm ci
+
+      - name: Cache CocoaPods
+        uses: actions/cache@v4
+        with:
+          path: quickshop-mobile/ios/Pods
+          key: pods-${{ hashFiles('quickshop-mobile/ios/Podfile.lock') }}
+          restore-keys: pods-
+
+      - name: Install CocoaPods
+        run: cd quickshop-mobile/ios && pod install
+
+      - name: Build for Testing
+        run: |
+          cd quickshop-mobile/ios
+          xcodebuild build-for-testing \
+            -workspace QuickShop.xcworkspace \
+            -scheme QuickShop \
+            -destination '${{ matrix.device.destination }}' \
+            -derivedDataPath build/DerivedData \
+            CODE_SIGNING_ALLOWED=NO \
+            | tail -20
+
+      - name: "Run: ${{ matrix.test_suite.name }} on ${{ matrix.device.name }}"
+        env:
+          RUN_SOURCE: "matrix-${{ matrix.test_suite.tag }}-${{ matrix.device.tag }}"
+        run: |
+          cd quickshop-mobile/ios
+          xcodebuild test-without-building \
+            -workspace QuickShop.xcworkspace \
+            -scheme QuickShop \
+            -destination '${{ matrix.device.destination }}' \
+            -derivedDataPath build/DerivedData \
+            -only-testing "${{ matrix.test_suite.target }}" \
+            RUN_SOURCE="${RUN_SOURCE}" \
+            2>&1 | tail -30 || true

@@ -78,7 +78,7 @@ const CheckoutScreen = ({ navigation, route }) => {
     );
 
     return (
-        <SafeAreaView style={styles.container} edges={['top']}>
+        <SafeAreaView testID="checkoutView" style={styles.container} edges={['top']}>
             <StatusBar barStyle="light-content" backgroundColor="#1B1B1B" />
             <View style={styles.topBar}>
                 <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
@@ -141,6 +141,7 @@ const CheckoutScreen = ({ navigation, route }) => {
 
             <View style={styles.footer}>
                 <TouchableOpacity
+                    testID="placeOrderButton"
                     style={[styles.payButton, isProcessing && styles.payButtonDisabled]}
                     onPress={handleCheckout}
                     disabled={isProcessing}

@@ -105,6 +105,7 @@ const OrderHistoryScreen = ({ navigation }) => {
 
     const renderOrder = ({ item }) => (
         <TouchableOpacity
+            testID={`orderCard-${item.id}`}
             style={styles.orderCard}
             onPress={() => {
                 addBreadcrumb(`Viewed order detail: ${item.id}`);
@@ -153,7 +154,7 @@ const OrderHistoryScreen = ({ navigation }) => {
     }
 
     return (
-        <SafeAreaView style={styles.container} edges={['top']}>
+        <SafeAreaView testID="orderHistoryView" style={styles.container} edges={['top']}>
             <StatusBar barStyle="light-content" backgroundColor="#1B1B1B" />
             <View style={styles.topBar}>
                 <Text style={styles.topBarTitle}>ONLINE<Text style={styles.topBarTitleLight}>BOUTIQUE</Text></Text>

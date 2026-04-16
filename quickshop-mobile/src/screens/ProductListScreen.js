@@ -170,6 +170,7 @@ const ProductListScreen = ({ navigation }) => {
                     {CATEGORIES.map(cat => (
                         <TouchableOpacity
                             key={cat.id}
+                            testID={`category-${cat.name}`}
                             style={[
                                 styles.categoryItem,
                                 selectedCategory === cat.id && styles.categoryItemActive
@@ -188,12 +189,13 @@ const ProductListScreen = ({ navigation }) => {
     );
 
     return (
-        <SafeAreaView style={[styles.container, { backgroundColor: '#fff' }]} edges={['top', 'left', 'right']}>
+        <SafeAreaView testID="homeView" style={[styles.container, { backgroundColor: '#fff' }]} edges={['top', 'left', 'right']}>
             <StatusBar barStyle="light-content" backgroundColor="#1B1B1B" translucent={false} />
             <View style={styles.stickyHeader}>
                 <Text style={styles.stickyLogo}>ONLINE<Text style={styles.stickyLogoLight}>BOUTIQUE</Text></Text>
                 <View style={styles.stickyActions}>
                     <TouchableOpacity
+                        testID="searchButton"
                         style={styles.stickyIconButton}
                         onPress={() => navigation.navigate('Search')}
                     >
@@ -203,6 +205,7 @@ const ProductListScreen = ({ navigation }) => {
                 </View>
             </View>
             <FlatList
+                testID="productList"
                 data={selectedCategory === '1' ? PRODUCTS : PRODUCTS.filter(p => p.categoryId === selectedCategory)}
                 keyExtractor={item => item.id.toString()}
                 key={'2-col'}

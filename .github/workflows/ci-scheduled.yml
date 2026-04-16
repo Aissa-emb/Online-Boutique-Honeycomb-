@@ -1,0 +1,93 @@
+# ============================================================================
+# ci-scheduled.yml — Scheduled Lightweight Tests (every 4 hours)
+# ============================================================================
+# Free-tier optimized: single job, all tests batched, uses cached build
+# Generates ~4-6 sessions per run × 6 runs/day = ~24-36 sessions/day
+# Estimated runner time: ~5 min/run = ~30 min/day = ~150 macOS-min/month (after 10x)
+# ============================================================================
+
+name: Scheduled Tests
+
+on:
+  schedule:
+    - cron: '15 */4 * * *'    # Every 4 hours at :15
+  workflow_dispatch:
+
+concurrency:
+  group: ci-scheduled
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: macos-14
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        test_suite:
+          - name: "Browse Products"
+            target: "OnlineBoutiqueUITests/OnlineBoutiqueUITests/testBrowseProducts"
+            run_source: "scheduled-browse"
+          - name: "Add to Cart"
+            target: "OnlineBoutiqueUITests/OnlineBoutiqueUITests/testAddToCart"
+            run_source: "scheduled-cart"
+          - name: "Search Flow"
+            target: "OnlineBoutiqueUITests/OnlineBoutiqueUITests/testSearchFlow"
+            run_source: "scheduled-search"
+          - name: "Checkout Flow"
+            target: "OnlineBoutiqueUITests/OnlineBoutiqueUITests/testCheckoutFlow"
+            run_source: "scheduled-checkout"
+          - name: "Quick Browse"
+            target: "OnlineBoutiqueUITests/OnlineBoutiqueUITests/testQuickBrowseAndLeave"
+            run_source: "scheduled-quickbrowse"
+          - name: "Order History"
+            target: "OnlineBoutiqueUITests/OnlineBoutiqueUITests/testOrderHistory"
+            run_source: "scheduled-orders"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: quickshop-mobile/package-lock.json
+
+      - name: Install JS dependencies
+        run: cd quickshop-mobile && npm ci
+
+      - name: Cache CocoaPods
+        uses: actions/cache@v4
+        with:
+          path: quickshop-mobile/ios/Pods
+          key: pods-${{ hashFiles('quickshop-mobile/ios/Podfile.lock') }}
+          restore-keys: pods-
+
+      - name: Install CocoaPods
+        run: cd quickshop-mobile/ios && pod install
+
+      - name: Build for Testing
+        run: |
+          cd quickshop-mobile/ios
+          xcodebuild build-for-testing \
+            -workspace QuickShop.xcworkspace \
+            -scheme QuickShop \
+            -destination 'platform=iOS Simulator,name=iPhone 16' \
+            -derivedDataPath build/DerivedData \
+            CODE_SIGNING_ALLOWED=NO \
+            | tail -20
+
+      - name: "Run: ${{ matrix.test_suite.name }}"
+        env:
+          RUN_SOURCE: ${{ matrix.test_suite.run_source }}
+        run: |
+          cd quickshop-mobile/ios
+          xcodebuild test-without-building \
+            -workspace QuickShop.xcworkspace \
+            -scheme QuickShop \
+            -destination 'platform=iOS Simulator,name=iPhone 16' \
+            -derivedDataPath build/DerivedData \
+            -only-testing "${{ matrix.test_suite.target }}" \
+            RUN_SOURCE="${RUN_SOURCE}" \
+            2>&1 | tail -30 || true

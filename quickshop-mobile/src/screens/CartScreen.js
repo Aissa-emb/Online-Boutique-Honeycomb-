@@ -51,13 +51,13 @@ const CartScreen = ({ navigation }) => {
     );
 
     return (
-        <SafeAreaView style={styles.container} edges={['top']}>
+        <SafeAreaView testID="cartView" style={styles.container} edges={['top']}>
             <StatusBar barStyle="light-content" backgroundColor="#1B1B1B" />
             <View style={styles.topBar}>
                 <Text style={styles.topBarTitle}>ONLINE<Text style={styles.topBarTitleLight}>BOUTIQUE</Text></Text>
             </View>
             {cartItems.length === 0 ? (
-                <View style={styles.emptyState}>
+                <View testID="emptyCartView" style={styles.emptyState}>
                     <Text style={styles.emptyTitle}>Your Cart is Empty</Text>
                     <Text style={styles.emptySubtitle}>Browse our collection to find something you love.</Text>
                     <TouchableOpacity
@@ -70,6 +70,7 @@ const CartScreen = ({ navigation }) => {
             ) : (
                 <>
                     <FlatList
+                        testID="cartItemsList"
                         data={cartItems}
                         keyExtractor={(item, index) => `${item.id}-${index}`}
                         renderItem={renderItem}
@@ -82,7 +83,7 @@ const CartScreen = ({ navigation }) => {
                                 USD {totalPrice.toFixed(2)}
                             </Text>
                         </View>
-                        <TouchableOpacity style={styles.checkoutButton} onPress={proceedToCheckout}>
+                        <TouchableOpacity testID="proceedToCheckoutButton" style={styles.checkoutButton} onPress={proceedToCheckout}>
                             <Text style={styles.checkoutButtonText}>PROCEED TO CHECKOUT</Text>
                         </TouchableOpacity>
                     </View>

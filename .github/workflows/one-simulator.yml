@@ -1,0 +1,96 @@
+# ============================================================================
+# one-simulator.yml — Session Stitching Tests (every 6 hours)
+# ============================================================================
+# Runs ALL 11 tests sequentially on a single simulator.
+# This gives Embrace stitched multi-session timelines.
+# Generates ~15 sessions per run (11 tests + 5 from multi-session) × 4/day = ~60/day
+# Estimated runner time: ~8 min/run × 4 = ~32 min/day
+# ============================================================================
+
+name: One Simulator (Stitched)
+
+on:
+  schedule:
+    - cron: '45 */6 * * *'    # Every 6 hours at :45
+  workflow_dispatch:
+
+concurrency:
+  group: one-simulator
+  cancel-in-progress: true
+
+jobs:
+  stitched-tests:
+    runs-on: macos-14
+    timeout-minutes: 25
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: quickshop-mobile/package-lock.json
+
+      - name: Install JS dependencies
+        run: cd quickshop-mobile && npm ci
+
+      - name: Cache CocoaPods
+        uses: actions/cache@v4
+        with:
+          path: quickshop-mobile/ios/Pods
+          key: pods-${{ hashFiles('quickshop-mobile/ios/Podfile.lock') }}
+          restore-keys: pods-
+
+      - name: Install CocoaPods
+        run: cd quickshop-mobile/ios && pod install
+
+      - name: Build for Testing
+        run: |
+          cd quickshop-mobile/ios
+          xcodebuild build-for-testing \
+            -workspace QuickShop.xcworkspace \
+            -scheme QuickShop \
+            -destination 'platform=iOS Simulator,name=iPhone 16' \
+            -derivedDataPath build/DerivedData \
+            CODE_SIGNING_ALLOWED=NO \
+            | tail -20
+
+      - name: Run All Tests (Stitched)
+        env:
+          RUN_SOURCE: one-simulator-stitched
+        run: |
+          cd quickshop-mobile/ios
+          
+          TESTS=(
+            "testBrowseProducts"
+            "testAddToCart"
+            "testCheckoutFlow"
+            "testSearchFlow"
+            "testQuickBrowseAndLeave"
+            "testAbandonedCart"
+            "testAccountView"
+            "testRepeatProductBrowsing"
+            "testHomeToSearchToCart"
+            "testMultiSessionTimeline"
+            "testOrderHistory"
+          )
+          
+          echo "Running ${#TESTS[@]} tests sequentially on single simulator"
+          
+          for test in "${TESTS[@]}"; do
+            echo ""
+            echo "--- $test ---"
+            xcodebuild test-without-building \
+              -workspace QuickShop.xcworkspace \
+              -scheme QuickShop \
+              -destination 'platform=iOS Simulator,name=iPhone 16' \
+              -derivedDataPath build/DerivedData \
+              -only-testing "OnlineBoutiqueUITests/OnlineBoutiqueUITests/$test" \
+              RUN_SOURCE="one-simulator-stitched" \
+              2>&1 | tail -10 || echo "⚠️ $test had issues, continuing..."
+            sleep 2
+          done
+          
+          echo "All stitched tests complete."

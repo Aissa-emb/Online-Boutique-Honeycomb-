@@ -12,14 +12,23 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		3EFDCB66D5A1BD3B29EDB0CB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F71E480CCBAE94E6CBBD5C0D /* Foundation.framework */; };
 		6731776232D74C53AA5526FA /* EmbraceInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701BDCE3E93647A7A5CC3DAE /* EmbraceInitializer.swift */; };
 		7699B88040F8A987B510C191 /* libPods-QuickShop-QuickShopTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-QuickShop-QuickShopTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		99699A119AFD48AF952263E2 /* QuickShop-Bridging-Header.h in Sources */ = {isa = PBXBuildFile; fileRef = 9A60780A68C64872A636D255 /* QuickShop-Bridging-Header.h */; };
+		FE12284FFBC8CDE9C270716F /* OnlineBoutiqueUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C543F5F17811ACD216283DB6 /* OnlineBoutiqueUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		00E356F41AD99517003FC87E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
+			remoteInfo = QuickShop;
+		};
+		5BF3AF97C774B9F5B78EC969 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
@@ -39,15 +48,19 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = QuickShop/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = QuickShop/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-QuickShop-QuickShopTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QuickShop-QuickShopTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C674014C2DE33A131BCC4C0 /* OnlineBoutiqueUITests */ = {isa = PBXFileReference; includeInIndex = 0; path = OnlineBoutiqueUITests; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B4392A12AC88292D35C810B /* Pods-QuickShop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickShop.debug.xcconfig"; path = "Target Support Files/Pods-QuickShop/Pods-QuickShop.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-QuickShop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickShop.release.xcconfig"; path = "Target Support Files/Pods-QuickShop/Pods-QuickShop.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-QuickShop-QuickShopTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickShop-QuickShopTests.debug.xcconfig"; path = "Target Support Files/Pods-QuickShop-QuickShopTests/Pods-QuickShop-QuickShopTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-QuickShop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QuickShop.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		701BDCE3E93647A7A5CC3DAE /* EmbraceInitializer.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = EmbraceInitializer.swift; path = QuickShop/EmbraceInitializer.swift; sourceTree = "<group>"; };
+		78EDE35EA4C99A01B153CABF /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = Info.plist; path = OnlineBoutiqueUITests/Info.plist; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = QuickShop/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-QuickShop-QuickShopTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickShop-QuickShopTests.release.xcconfig"; path = "Target Support Files/Pods-QuickShop-QuickShopTests/Pods-QuickShop-QuickShopTests.release.xcconfig"; sourceTree = "<group>"; };
 		9A60780A68C64872A636D255 /* QuickShop-Bridging-Header.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = "QuickShop-Bridging-Header.h"; path = "QuickShop/QuickShop-Bridging-Header.h"; sourceTree = "<group>"; };
+		C543F5F17811ACD216283DB6 /* OnlineBoutiqueUITests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OnlineBoutiqueUITests.swift; path = OnlineBoutiqueUITests/OnlineBoutiqueUITests.swift; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		F71E480CCBAE94E6CBBD5C0D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +77,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C80B921A6F3F58F76C31292 /* libPods-QuickShop.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7A217177DA0A86A14AEC233C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3EFDCB66D5A1BD3B29EDB0CB /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,8 +129,27 @@
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				5DCACB8F33CDC322A6C60F78 /* libPods-QuickShop.a */,
 				19F6CBCC0A4E27FBF8BF4A61 /* libPods-QuickShop-QuickShopTests.a */,
+				4968DA376DD580BD3A9D74C7 /* iOS */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4968DA376DD580BD3A9D74C7 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				F71E480CCBAE94E6CBBD5C0D /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		5A2E3E6B351FD27C6C06E725 /* OnlineBoutiqueUITests */ = {
+			isa = PBXGroup;
+			children = (
+				C543F5F17811ACD216283DB6 /* OnlineBoutiqueUITests.swift */,
+				78EDE35EA4C99A01B153CABF /* Info.plist */,
+			);
+			name = OnlineBoutiqueUITests;
+			path = OnlineBoutiqueUITests;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -128,6 +168,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				5A2E3E6B351FD27C6C06E725 /* OnlineBoutiqueUITests */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -139,6 +180,7 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* QuickShop.app */,
 				00E356EE1AD99517003FC87E /* QuickShopTests.xctest */,
+				2C674014C2DE33A131BCC4C0 /* OnlineBoutiqueUITests */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -201,6 +243,23 @@
 			productReference = 13B07F961A680F5B00A75B9A /* QuickShop.app */;
 			productType = "com.apple.product-type.application";
 		};
+		D58083730F296E9917369C54 /* OnlineBoutiqueUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A5F5C5051AD9E4AE6274F838 /* Build configuration list for PBXNativeTarget "OnlineBoutiqueUITests" */;
+			buildPhases = (
+				C1DD1FE5E691860D20F7271A /* Sources */,
+				7A217177DA0A86A14AEC233C /* Frameworks */,
+				FDAF5B4CC66FBED99DCAECCC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7021CD72CFFF23983D3B439F /* PBXTargetDependency */,
+			);
+			name = OnlineBoutiqueUITests;
+			productName = OnlineBoutiqueUITests;
+			productReference = 2C674014C2DE33A131BCC4C0 /* OnlineBoutiqueUITests */;
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -233,6 +292,7 @@
 			targets = (
 				13B07F861A680F5B00A75B9A /* QuickShop */,
 				00E356ED1AD99517003FC87E /* QuickShopTests */,
+				D58083730F296E9917369C54 /* OnlineBoutiqueUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -251,6 +311,13 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FDAF5B4CC66FBED99DCAECCC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,7 +430,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "REACT_NATIVE_MAP_PATH=\"$CONFIGURATION_BUILD_DIR/embrace-assets/main.jsbundle.map\" EMBRACE_ID=gewxz EMBRACE_TOKEN=48c50305c463ff3a53acbf8d7449a0da \"$SRCROOT/../node_modules/@embrace-io/react-native/ios/scripts/run.sh\"";
+			shellScript = "REACT_NATIVE_MAP_PATH=\"$CONFIGURATION_BUILD_DIR/embrace-assets/main.jsbundle.map\" EMBRACE_ID=vowzc EMBRACE_TOKEN=f0a4092149d843e18272a1766ee7bba9 \"$SRCROOT/../node_modules/@embrace-io/react-native/ios/scripts/run.sh\"";
 		};
 		E235C05ADACE081382539298 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -440,6 +507,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C1DD1FE5E691860D20F7271A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE12284FFBC8CDE9C270716F /* OnlineBoutiqueUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -447,6 +522,12 @@
 			isa = PBXTargetDependency;
 			target = 13B07F861A680F5B00A75B9A /* QuickShop */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
+		};
+		7021CD72CFFF23983D3B439F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = QuickShop;
+			target = 13B07F861A680F5B00A75B9A /* QuickShop */;
+			targetProxy = 5BF3AF97C774B9F5B78EC969 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -710,6 +791,49 @@
 			};
 			name = Release;
 		};
+		96962A4BD89A69DA63A8B67B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				CODE_SIGN_IDENTITY = "-";
+				INFOPLIST_FILE = OnlineBoutiqueUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.OnlineBoutiqueUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = QuickShop;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B9A451B2C00F5C06F1FF4C42 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				CODE_SIGN_IDENTITY = "-";
+				INFOPLIST_FILE = OnlineBoutiqueUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.OnlineBoutiqueUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = QuickShop;
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -736,6 +860,15 @@
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
 				83CBBA211A601CBA00E9B192 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A5F5C5051AD9E4AE6274F838 /* Build configuration list for PBXNativeTarget "OnlineBoutiqueUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				96962A4BD89A69DA63A8B67B /* Release */,
+				B9A451B2C00F5C06F1FF4C42 /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

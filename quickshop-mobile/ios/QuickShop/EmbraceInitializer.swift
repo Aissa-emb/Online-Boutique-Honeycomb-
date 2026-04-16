@@ -9,7 +9,7 @@ import EmbraceIO
             try Embrace
                 .setup(
                     options: Embrace.Options(
-                        appId: "gewxz",
+                        appId: "vowzc",
                         platform: .reactNative
                     )
                 )

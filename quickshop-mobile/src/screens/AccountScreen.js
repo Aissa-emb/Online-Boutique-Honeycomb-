@@ -61,7 +61,7 @@ const AccountScreen = ({ navigation }) => {
     );
 
     return (
-        <SafeAreaView style={styles.container} edges={['top']}>
+        <SafeAreaView testID="accountView" style={styles.container} edges={['top']}>
             <StatusBar barStyle="light-content" backgroundColor="#1B1B1B" />
             <View style={styles.topBar}>
                 <Text style={styles.topBarTitle}>ONLINE<Text style={styles.topBarTitleLight}>BOUTIQUE</Text></Text>
@@ -135,6 +135,20 @@ const AccountScreen = ({ navigation }) => {
                         apiClient.post('/api/v1/session/logout', {}).catch(() => { });
                     }} />
                 </Section>
+
+                <TouchableOpacity
+                    testID="forceCrashButton"
+                    style={{ opacity: 0.01, padding: 10, alignItems: 'center', marginBottom: 20 }}
+                    onPress={() => {
+                        addBreadcrumb('Force crash triggered from Account screen');
+                        // Deterministic crash for testing - throw after a short delay to let breadcrumb flush
+                        setTimeout(() => {
+                            throw new Error('Force crash triggered for Embrace testing');
+                        }, 100);
+                    }}
+                >
+                    <Text style={{ fontSize: 10, color: '#F5F5F5' }}>Force Crash</Text>
+                </TouchableOpacity>
             </ScrollView>
         </SafeAreaView>
     );
