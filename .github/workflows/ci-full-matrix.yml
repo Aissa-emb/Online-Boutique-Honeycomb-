@@ -70,7 +70,10 @@ jobs:
           restore-keys: pods-
 
       - name: Install CocoaPods
-        run: cd quickshop-mobile/ios && pod install
+        run: |
+          cd quickshop-mobile/ios
+          rm -f Podfile.lock
+          pod install --repo-update
 
       - name: Build for Testing
         run: |
