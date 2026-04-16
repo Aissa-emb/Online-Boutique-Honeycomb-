@@ -45,6 +45,7 @@ jobs:
           CP_HOME_DIR: ${{ runner.temp }}/cocoapods
         run: |
           cd quickshop-mobile/ios
+          sed -i '' 's/boostorg.jfrog.io\/artifactory\/main/archives.boost.io/g' ../node_modules/react-native/third-party-podspecs/boost.podspec
           export COCOAPODS_DISABLE_SPEC_CHECKSUMS=1
           pod install --no-repo-update || pod install --repo-update
 

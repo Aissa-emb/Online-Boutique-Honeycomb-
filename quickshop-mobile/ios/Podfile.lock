@@ -1,21 +1,21 @@
 PODS:
   - boost (1.76.0)
   - DoubleConversion (1.1.6)
-  - EmbraceIO (6.15.1):
-    - EmbraceIO/EmbraceIO (= 6.15.1)
-  - EmbraceIO/EmbraceAtomicsShim (6.15.1)
-  - EmbraceIO/EmbraceCaptureService (6.15.1):
+  - EmbraceIO (6.16.2):
+    - EmbraceIO/EmbraceIO (= 6.16.2)
+  - EmbraceIO/EmbraceAtomicsShim (6.16.2)
+  - EmbraceIO/EmbraceCaptureService (6.16.2):
     - EmbraceIO/EmbraceConfiguration
     - EmbraceIO/EmbraceOTelInternal
     - EmbraceIO/OpenTelemetrySdk
-  - EmbraceIO/EmbraceCommonInternal (6.15.1):
+  - EmbraceIO/EmbraceCommonInternal (6.16.2):
     - EmbraceIO/EmbraceAtomicsShim
     - EmbraceIO/OpenTelemetrySdk
-  - EmbraceIO/EmbraceConfigInternal (6.15.1):
+  - EmbraceIO/EmbraceConfigInternal (6.16.2):
     - EmbraceIO/EmbraceCommonInternal
     - EmbraceIO/EmbraceConfiguration
-  - EmbraceIO/EmbraceConfiguration (6.15.1)
-  - EmbraceIO/EmbraceCore (6.15.1):
+  - EmbraceIO/EmbraceConfiguration (6.16.2)
+  - EmbraceIO/EmbraceCore (6.16.2):
     - EmbraceIO/EmbraceCaptureService
     - EmbraceIO/EmbraceCommonInternal
     - EmbraceIO/EmbraceConfigInternal
@@ -25,44 +25,44 @@ PODS:
     - EmbraceIO/EmbraceSemantics
     - EmbraceIO/EmbraceStorageInternal
     - EmbraceIO/EmbraceUploadInternal
-  - EmbraceIO/EmbraceCoreDataInternal (6.15.1):
+  - EmbraceIO/EmbraceCoreDataInternal (6.16.2):
     - EmbraceIO/EmbraceCommonInternal
     - EmbraceIO/EmbraceObjCUtilsInternal
-  - EmbraceIO/EmbraceCrash (6.15.1):
+  - EmbraceIO/EmbraceCrash (6.16.2):
     - EmbraceIO/EmbraceCommonInternal
     - EmbraceIO/EmbraceKSCrash
     - EmbraceIO/EmbraceSemantics
-  - EmbraceIO/EmbraceIO (6.15.1):
+  - EmbraceIO/EmbraceIO (6.16.2):
     - EmbraceIO/EmbraceCaptureService
     - EmbraceIO/EmbraceCommonInternal
     - EmbraceIO/EmbraceCore
     - EmbraceIO/EmbraceCrash
     - EmbraceIO/EmbraceKSCrashBacktraceSupport
     - EmbraceIO/EmbraceSemantics
-  - EmbraceIO/EmbraceKSCrash (6.15.1):
-    - KSCrash (~> 2.4)
-  - EmbraceIO/EmbraceKSCrashBacktraceSupport (6.15.1):
+  - EmbraceIO/EmbraceKSCrash (6.16.2):
+    - KSCrash (~> 2.5.1)
+  - EmbraceIO/EmbraceKSCrashBacktraceSupport (6.16.2):
     - EmbraceIO/EmbraceCommonInternal
     - EmbraceIO/EmbraceKSCrash
-  - EmbraceIO/EmbraceObjCUtilsInternal (6.15.1)
-  - EmbraceIO/EmbraceOTelInternal (6.15.1):
+  - EmbraceIO/EmbraceObjCUtilsInternal (6.16.2)
+  - EmbraceIO/EmbraceOTelInternal (6.16.2):
     - EmbraceIO/EmbraceCommonInternal
     - EmbraceIO/EmbraceCoreDataInternal
     - EmbraceIO/EmbraceSemantics
     - EmbraceIO/EmbraceStorageInternal
     - EmbraceIO/OpenTelemetrySdk
-  - EmbraceIO/EmbraceSemantics (6.15.1):
+  - EmbraceIO/EmbraceSemantics (6.16.2):
     - EmbraceIO/EmbraceCommonInternal
     - EmbraceIO/OpenTelemetrySdk
-  - EmbraceIO/EmbraceStorageInternal (6.15.1):
+  - EmbraceIO/EmbraceStorageInternal (6.16.2):
     - EmbraceIO/EmbraceCommonInternal
     - EmbraceIO/EmbraceCoreDataInternal
     - EmbraceIO/EmbraceSemantics
-  - EmbraceIO/EmbraceUploadInternal (6.15.1):
+  - EmbraceIO/EmbraceUploadInternal (6.16.2):
     - EmbraceIO/EmbraceCommonInternal
     - EmbraceIO/EmbraceCoreDataInternal
     - EmbraceIO/EmbraceOTelInternal
-  - EmbraceIO/OpenTelemetrySdk (6.15.1):
+  - EmbraceIO/OpenTelemetrySdk (6.16.2):
     - OpenTelemetry-Swift-Sdk (~> 2.1)
   - FBLazyVector (0.72.6)
   - FBReactNativeSpec (0.72.6):
@@ -516,11 +516,11 @@ PODS:
     - React-jsi (= 0.72.6)
     - React-logger (= 0.72.6)
     - React-perflogger (= 0.72.6)
-  - RNEmbraceCore (6.4.0):
-    - EmbraceIO (= 6.15.1)
+  - RNEmbraceCore (6.6.0):
+    - EmbraceIO (= 6.16.2)
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
-  - RNGestureHandler (2.30.0):
+  - RNGestureHandler (2.31.1):
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
   - RNScreens (3.37.0):
@@ -678,9 +678,9 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  boost: d9857fa6515e4f9985f29bf6f2e40cb03f54f859
+  boost: 7dcd2de282d72e344012f7d6564d024930a6a440
   DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54
-  EmbraceIO: ac651cc68052a8c53638ea6007a0fb30615c8010
+  EmbraceIO: 9467b3b2b5b9f011f14d71c5de982074d16d57b3
   FBLazyVector: 748c0ef74f2bf4b36cfcccf37916806940a64c32
   FBReactNativeSpec: 966f29e4e697de53a3b366355e8f57375c856ad9
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
@@ -723,8 +723,8 @@ SPEC CHECKSUMS:
   React-runtimescheduler: 8d48e9f0cf62099f501fcd52234240006fa12c8f
   React-utils: ee4e6bf16d6882500500d517d36f9035874c5f6a
   ReactCommon: 2060ee7b68e71d23849968f6406550ba2df71bdb
-  RNEmbraceCore: b68d6e11546a6e3411352c3c7585024bbefe506d
-  RNGestureHandler: 1141f6753c7cd749a20bbd46d2010968dffe3fc1
+  RNEmbraceCore: 1b83292c2980cdd486c3a5483b1fa79a255fb276
+  RNGestureHandler: 31d3a3ba2092eda665aab832f2208260e350a2f3
   RNScreens: c1a851e518284641160aa5af4894479773a6e719
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: b76f1acfda8212aa16b7e26bcce3983230c82603
